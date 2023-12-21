@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>POS PRINT!</title>
+  <style>
+  * {
+    font-size: 10px;
+    font-family: 'Times New Roman';
+  }
+  
+  th, table {
+    border-top: 2px dashed black;
+    border-bottom: 2px dashed black;
+    border-collapse: collapse;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+  }
+  
+  .table_coll_wid {
+    width: 75px;
+    max-width: 75px;
+  }
+
+  .left_txt {
+    text-align: left !important;
+    align-content: left !important;
+  }
+
+  .center_txt {
+    text-align: center !important;
+    align-content: center !important;
+  }
+  .end_txt {
+    text-align: right !important;
+    align-content: right !important;
+  }
+  .pos_print {
+    width: 300px;
+    max-width: 300px;
+    page-break-before: always;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+  
+  img {
+    max-width: inherit;
+    width: inherit;
+  }
+  
+  @media print {
+    .oculto-impresion,
+    .oculto-impresion * {
+      display: none !important;
+    }
+  }
+
+  .font_family_fold{
+    font-weight: bold;
+  }
+  .font_family_size_10{
+    font-size: 10px !important;
+  }
+  .font_family_size_9{
+    font-size: 9px !important;
+  }
+  .font_family_size_8{
+    font-size: 8px !important;
+  }
+  .font_family_size_11{
+    font-size: 11px !important;
+  }
+  .font_family_size_12{
+    font-size: 12px !important;
+  }
+  .font_family_size_13{
+    font-size: 13px !important;
+  }
+  .font_family_size_14{
+    font-size: 14px !important;
+  }
+  .font_family_size_15{
+    font-size: 15px !important;
+  }
+  .font_family_size_16{
+    font-size: 16px !important;
+  }
+  .font_family_size_17{
+    font-size: 17px !important;
+  }
+  .font_family_size_18{
+    font-size: 19px !important;
+  }
+  .font_family_size_19{
+    font-size: 19px !important;
+  }
+  .font_family_size_20{
+    font-size: 20px !important;
+  }
+  @page {
+    size: auto;   
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 8%;
+  }
+  .alignleft {
+    float: left;
+  }
+  .alignright {
+    float: right;
+  }
+
+  .mainBlocks{
+    display: flex;
+    justify-content: space-between;
+  }
+  .vatable_headers{
+    padding-bottom: 5px !important; 
+    border-bottom: 2px dashed black;
+  }
+
+
+</style>
+</head>
+
+<body>
+  <div class="pos_print"> 
+    <p class="center_txt font_family_fold font_family_size_16" style="font-family: bold;">STC SUPERMARKET</p>
+    <p class="center_txt font_family_size_14" style="font-family: bold;">BOIS DE ROSE</p>
+    <table>
+      <thead>
+        <tr>
+          <th class="font_family_fold font_family_size_11 table_coll_wid left_txt">ITEM</th>
+          <th class="font_family_fold font_family_size_11 table_coll_wid end_txt">QTY</th>
+          <th class="font_family_fold font_family_size_11 table_coll_wid end_txt">PRICE</th>
+          <th class="font_family_fold font_family_size_11 table_coll_wid end_txt">AMOUNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">VEGETABLE SEASONING(BELLACASA) 12X76G</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">KUP VANILLE 27X100ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">KUP AMANDE 27X100ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">ESKIMO PIE CHOCK STICK X70ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">WHITE OATS 24X500G (SAFCO)</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">WALNUT (MANOLIS) 15X150G</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">WALNUT (MANOLIS) 40X60G</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">KUP VANILLE 27X100ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">VASELINE COCOA RADIANT LOTION6X200ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">VASEL HB LOT ESHE BPE 6X200ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 left_txt" colspan="4">VASEL HB LOT ALOS BPE 6X200ML</td>
+        </tr>
+        <tr>
+          <td class="font_family_size_11 table_coll_wid"></td>
+          <td class="font_family_size_11 table_coll_wid end_txt">1.00</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+          <td class="font_family_size_11 table_coll_wid end_txt">8.50</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="font_family_fold font_family_size_11 left_txt">
+      TOTAL<span class="font_family_size_11" style="float:right;">:&nbsp;&nbsp;&nbsp;760.00</span>
+    </p>
+    <p class="font_family_fold font_family_size_11 left_txt">
+      DISCOUNT<span class="font_family_size_11" style="float:right;">:&nbsp;&nbsp;&nbsp;190.00</span>
+    </p>
+    <p class="font_family_fold font_family_size_11 left_txt">
+      SCR<span class="font_family_size_11" style="float:right;">:&nbsp;&nbsp;&nbsp;960.00</span>
+    </p>
+    <p class="font_family_fold font_family_size_11 left_txt">
+      CHG SCR<span class="font_family_size_11" style="float:right;">:&nbsp;&nbsp;&nbsp;390.00</span>
+    </p>
+    <hr style="border-top: 2px dashed black;">
+    <p class="font_family_size_12 left_txt">
+      TOTAL ITEMS&nbsp;&nbsp;:&nbsp; ##&nbsp;8.00
+    </p>
+    <div class="mainBlocks">
+      <div><span class="font_family_size_12 vatable_headers"> Tax </span></div>
+      <div><span class="font_family_size_12 vatable_headers"> Rate </span></div>
+      <div><span class="font_family_size_12 vatable_headers"> Vatable Amt </span></div>
+      <div><span class="font_family_size_12 vatable_headers"> VAT Amt </span></div>
+    </div>
+    <br>
+    <br>
+    <div class="mainBlocks">
+      <div><span class="font_family_size_12"> S </span></div>
+      <div><span class="font_family_size_12"> 15 </span></div>
+      <div><span class="font_family_size_12"> 495.66</span></div>
+      <div><span class="font_family_size_12"> 74.35</span></div>
+    </div>
+    <br>
+    <p class="font_family_size_11 left_txt">
+      PRICE EXCLUSIVE OF VAT WHERE APPLICABLE
+    </p>
+    <hr style="border-top: 2px dashed black;">
+    <hr style="border-top: 2px dashed black;">
+    <p class="font_family_size_11 left_txt">
+     YOU WERE SERVED BY &nbsp;: &nbsp; ADMINSTC
+    </p>
+  </div>
+</body>
+
+</html>

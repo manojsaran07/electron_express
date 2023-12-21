@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tectalik Service</title>
+  </head>
+  <body>
+  	<h1><%= machine_user %></h2>
+  	<h2>Listen Port : <%= runing_port %></h2>
+
+  	<h2>POS Printers</h2>
+  		<h4>Selected POS Printer : <span id="pos_print_value"><%= POS_PRINTER %></span></h4>
+  	<ul>
+	  	<% list_printers.forEach( l_p => {%>
+	  		<li>
+	  			<% let ChkPOS = POS_PRINTER == l_p.name ? 'checked' : '' %>
+		  		<input type="radio" name="pos_print" id="<%=l_p.name+'POS'%>" value="<%=l_p.name%>" <%=ChkPOS%> >
+		  		<label for="<%=l_p.name+'POS'%>"><%=l_p.name%></label>
+				</li>
+			<%})%>
+		</ul>
+
+		<h2>Display Pole Ports</h2>
+  		<h4>Selected Display Pole Ports : <span id="display_pole_value"><%= DISPLAY_POLE_PORT %></span></h4>
+  	<ul>
+	  	<% list_serial_ports.forEach( s_p => {%>
+	  		<li>
+	  			<% let ChkDISPLAY_POLE = DISPLAY_POLE_PORT == s_p ? 'checked' : '' %>
+		  		<input type="radio" name="display_pole" id="<%=s_p+'DISPLAY_POLE'%>" value="<%=s_p%>" <%=ChkDISPLAY_POLE%> >
+		  		<label for="<%=s_p+'DISPLAY_POLE'%>"><%=s_p%></label>
+				</li>
+			<%})%>
+		</ul>
+
+
+		<h2>Label Printers</h2>
+  		<h4>Selected Label Printer : <span id="label_print_value"><%= LABEL_PRINTER %></span></h4>
+		<ul>
+	  	<% list_printers.forEach( l_p => {%>
+	  		<li>
+	  			<% let ChkLABEL = LABEL_PRINTER == l_p.name ? 'checked' : '' %>
+		  		<input type="radio" name="label_print" id="<%=l_p.name+'LABEL'%>" value="<%=l_p.name%>" <%=ChkLABEL%>>
+		  		<label for="<%=l_p.name+'LABEL'%>"><%=l_p.name%></label>
+				</li>
+			<%})%>
+		</ul>
+
+
+		<h2>WholeSale Printers</h2>
+  		<h4>Selected WholeSale Printer : <span id="wholesale_print_value"><%= WHOLESALE_PRINTER %></span></h4>
+		<ul>
+	  	<% list_printers.forEach( l_p => {%>
+	  		<li>
+	  			<% let ChkWHOLESALE = WHOLESALE_PRINTER == l_p.name ? 'checked' : '' %>
+		  		<input type="radio" name="wholesale_print" id="<%=l_p.name+'WHOLESALE'%>" value="<%=l_p.name%>" <%=ChkWHOLESALE%>>
+		  		<label for="<%=l_p.name+'WHOLESALE'%>"><%=l_p.name%></label>
+				</li>
+			<%})%>
+		</ul>
+
+
+  </body>
+
+<script>
+	(function() { ready(); })();
+
+	function ready() {
+		var POSradio = document.querySelectorAll('input[type=radio][name=pos_print]');
+		var Labelradio = document.querySelectorAll('input[type=radio][name=label_print]');
+		var Wholesale_radio = document.querySelectorAll('input[type=radio][name=wholesale_print]');
+		var Display_pole_radio = document.querySelectorAll('input[type=radio][name=display_pole]');
+		
+		function pos_label_changeHandler(event, value_print) {
+			var printers = event.target.value;
+			if (value_print == 'LABEL_PRINTER') {
+				document.getElementById("label_print_value").innerHTML = printers;
+			}else if (value_print == 'WHOLESALE_PRINTER') {
+				document.getElementById("wholesale_print_value").innerHTML = printers;
+			}else if (value_print == 'DISPLAY_POLE_PORT') {
+				document.getElementById("display_pole_value").innerHTML = printers;
+			}else{
+				document.getElementById("pos_print_value").innerHTML = printers;
+			}
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log('settings changed');
+				}
+			};
+			xhttp.open("POST", "/config_update", true);
+			xhttp.setRequestHeader( 'Content-Type', 'application/json' );
+			var formData = {}; 
+			formData.printer_name = printers;
+			formData.type = value_print;
+			xhttp.send(JSON.stringify(formData));
+		}
+		Array.prototype.forEach.call(POSradio, function(radio) {
+			radio.addEventListener('change', function() {
+				pos_label_changeHandler(event, 'POS_PRINTER');
+			}, false);
+		});
+
+		Array.prototype.forEach.call(Labelradio, function(radio) {
+			radio.addEventListener('change', function() {
+				pos_label_changeHandler(event, 'LABEL_PRINTER');
+			}, false);
+		});
+
+
+		Array.prototype.forEach.call(Wholesale_radio, function(radio) {
+			radio.addEventListener('change', function() {
+				pos_label_changeHandler(event, 'WHOLESALE_PRINTER');
+			}, false);
+		});
+		Array.prototype.forEach.call(Display_pole_radio, function(radio) {
+			radio.addEventListener('change', function() {
+				pos_label_changeHandler(event, 'DISPLAY_POLE_PORT');
+			}, false);
+		});
+	}
+</script>
+
+</html>
