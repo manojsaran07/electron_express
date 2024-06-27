@@ -186,23 +186,36 @@ server.post('/to_print_pdf_files', async (req, res) => {
 
 
 server.post('/base_64_to_pdf_Files', async (req, res) => {
+
+  let sys_d = path.resolve(__dirname, "./extraResources/System.Drawing.dll");
+  let pdf_v = path.resolve(__dirname, "./extraResources/PdfiumViewer.dll");
+
+  const CD = new Date();
+  const tempNAME= CD.getDate()+'_'+CD.getMonth()+'_'+CD.getFullYear()+'_'+CD.getHours()+'_'+CD.getMinutes()+'_'+CD.getMinutes();
+  let OutPutPath = path.resolve(__dirname, ".") + "/PDF_FILES/Direct_TEMP_PDF__"+tempNAME+'_'+_help_.generateRandomString()+".pdf";
+
+  let dd = fs.writeFile(OutPutPath, req.body.data, {encoding: 'base64'}, error => {
+    if (error) {
+        console.log(error, 'error');
+        return 'error';
+    } else {
+
+      let print_obj = {
+        "printer": _help_.get_wholesale_printers(),
+        "sys_d": sys_d,
+        "pdf_v": pdf_v,
+        "file_path": OutPutPath,
+        "copies": 1,
+      };
+
+      to_print_pdf_files(print_obj);
+      console.log('PDF Generated');
+      return 'success';
+    }
+  });
   
-  let print_obj = {
-    "data": req.body.data,
-    "printer": _help_.get_wholesale_printers()
-  }
-  let dd = await prinTMethods_Base64(print_obj).then(resData=> {
-     return 'Success';
-  }).catch((error) => {
-     console.log(error, 'error');
-     return 'error';
-  })
   res.send(dd);
 });
-
-
-
-
 
 server.post('/to_pdf_files_generates_and_print', async (req, res) => {
     

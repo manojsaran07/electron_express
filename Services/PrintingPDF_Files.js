@@ -60,7 +60,7 @@ function to_print_pdf_files(print_obj = {}){
       });
       if (error) {
        console.log(error, 'error')
-       throw error;
+       // throw error;
       }else{
        console.log(result, 'result')
       }
