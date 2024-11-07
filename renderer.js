@@ -2,6 +2,9 @@ const {ipcRenderer} = require('electron');
 const path = require('path');
 const server = require("./app.js");
 
+const Mustache = require('mustache');
+
+
 const fs = require('fs');
 
 const { BytesToPrinter, getPrintersObj, stringToDisplayPole } = require('./Services/BytesToPrinter.js');
@@ -94,6 +97,27 @@ server.post('/html_string_to_print_pdf', async (req, res) => {
   })
   res.send(dd);
 });
+
+
+
+server.post('/html_string_to_print_template', async (req, res) => {
+  
+  const filledTemplate = Mustache.render(req.body.htmlContent, req.body.data);
+
+  let print_obj = {
+    "htmlContent": filledTemplate,
+    "printer": _help_.get_wholesale_printers()
+  }
+  let dd = await prinTMethods(print_obj).then(resData=> {
+     return 'Success';
+  }).catch((error) => {
+     console.log(error, 'error');
+     return 'error';
+  })
+  res.send(dd);
+});
+
+
 server.post('/html_string_to_print_label', async (req, res) => {
   let htmlBoleto = req.body.data;
 
