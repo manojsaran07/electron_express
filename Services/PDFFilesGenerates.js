@@ -115,6 +115,53 @@ async function exportLOTHTMLAsPdf(SITE_DATA = {}, print_obj = {}, OutPutPath) {
   return dd;
 }
 
+
+function PDF_Files_Generates_TXN(print_obj = {}) {
+  const CD = new Date();
+  const tempNAME= CD.getDate()+'_'+CD.getMonth()+'_'+CD.getFullYear()+'_'+CD.getHours()+'_'+CD.getMinutes()+'_'+CD.getMinutes();
+  let OutPutPath = path.resolve(__dirname, "..\\") + "\\PDF_FILES\\TxN_pdf_"+tempNAME+'_'+_help_.generateRandomString()+".pdf";
+
+  export_HTMLAsPdf_TxN(print_obj, OutPutPath).then((response) => {
+    let FinalPath = OutPutPath;
+    let PASSING_obj = {
+      "printer": print_obj.printer,
+      "sys_d": print_obj.sys_d,
+      "pdf_v": print_obj.pdf_v,
+      "file_path": FinalPath,
+      "copies": Number(print_obj.copies) ? Math.floor(Number(print_obj.copies)) : 1,
+    };
+    to_print_pdf_files(PASSING_obj);
+
+  }).catch((error) => {
+    console.error('Error creating PDF:', error);
+  });
+}
+async function export_HTMLAsPdf_TxN(print_obj = {}, OutPutPath) {
+
+  const PASSING_obj = {
+    "htmlContent": print_obj.htmlContent,
+    "OutPutPath": OutPutPath,
+    "displayHeaderFooter": true,
+    "headerTemplate": ` `,
+    "footerTemplate": `<div id="footer-template" style="display: flex; font-size:8px !important; color:#808080; padding-left: 50px; text-align: center">
+      Page &nbsp;<span class="pageNumber"></span>&nbsp;of&nbsp;<span class="totalPages"></span>
+    </div>`,
+  }
+
+  let dd = await _help_.CommonPrinTPDFMethods(PASSING_obj).then(resData=> {
+     return resData;
+  }).catch((error) => {
+     return {
+      error_MSG: error,
+      status: false,
+      pdfPath: OutPutPath,
+     };
+  })
+  console.log(dd,'TX')
+  return dd;
+}
+
 module.exports = {
-	PDFFilesGenerates, 
+	PDFFilesGenerates,
+  PDF_Files_Generates_TXN,
 }

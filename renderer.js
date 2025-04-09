@@ -1,7 +1,6 @@
 const {ipcRenderer} = require('electron');
 const path = require('path');
 const server = require("./app.js");
-
 const Mustache = require('mustache');
 
 
@@ -11,14 +10,9 @@ const { BytesToPrinter, getPrintersObj, stringToDisplayPole } = require('./Servi
 const { fn_label_printing } = require('./Services/LabelPrinters.js');
 const { to_Open_Cash_Drawer, to_Open_Cash_Drawer_USING_DLL  } = require('./Services/OpenCashDrawer.js');
 const { to_print_pdf_files } = require('./Services/PrintingPDF_Files.js');
-const { PDFFilesGenerates } = require('./Services/PDFFilesGenerates.js');
+const { PDFFilesGenerates, PDF_Files_Generates_TXN } = require('./Services/PDFFilesGenerates.js');
 
 const _help_ = require('./Services/Helper.js');
-
-server.get('/get_printers', async (req, res) => {
-  let list_printers = await _help_.getListOfPrinters();
-  res.send(list_printers)
-})
 
 server.get('/get_Machine_HostNameandMACAddress', async (req, res) => {
   let list_host_mac_addr = _help_.get_Machine_HostNameandMACAddress();
@@ -116,6 +110,25 @@ server.post('/html_string_to_print_template', async (req, res) => {
   })
   res.send(dd);
 });
+
+
+server.post('/html_str_to_print', async (req, res) => {
+  let dd = await generatePDF_Server(req.body.htmlContent, req.body.data)
+  res.send('Success');
+});
+async function generatePDF_Server(htmlContent, data){
+  for (var i = 0; i < data.length; i++) {
+    const filledTemplate = Mustache.render(htmlContent, data[i]);
+
+    let print_obj = {
+      "htmlContent": filledTemplate,
+      "printer": _help_.get_wholesale_printers()
+    }
+    console.log(print_obj,'print_obj')
+    await prinTMethods(print_obj);
+  }
+  return 'Success';
+}
 
 
 server.post('/html_string_to_print_label', async (req, res) => {
